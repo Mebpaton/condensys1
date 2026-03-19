@@ -1,49 +1,83 @@
 function runSystem() {
 
-    // SENSOR DATA (simulation)
-    let temperature = (20 + Math.random() * 20).toFixed(2);
-    let humidity = (40 + Math.random() * 60).toFixed(2);
+    // -------------------------
+    // USER INPUT
+    // -------------------------
+    let temperature = parseFloat(document.getElementById("tempInput").value);
+    let humidity = parseFloat(document.getElementById("humInput").value);
+
+    if (isNaN(temperature) || isNaN(humidity)) {
+        alert("Please enter valid values");
+        return;
+    }
 
     // -------------------------
     // DNN (SIMULATED MODEL)
     // -------------------------
-    // Weighted formula (like neural network)
     let w1 = 0.6;
     let w2 = 0.4;
     let bias = 5;
 
-    let predicted = (temperature * w1 + humidity * w2 - bias).toFixed(2);
+    let predicted = (temperature * w1 + humidity * w2 - bias);
+
+    if (predicted < 0) predicted = 0;
 
     // -------------------------
-    // ACTUAL WATER (REAL OUTPUT)
+    // ACTUAL WATER (SIMULATION)
     // -------------------------
-    let actual = (predicted - (Math.random() * 5)).toFixed(2);
+    let actual = predicted - (Math.random() * 3);
+
+    if (actual < 0) actual = 0;
 
     // -------------------------
     // EFFICIENCY
     // -------------------------
-    let efficiency = ((actual / predicted) * 100).toFixed(2);
+    let efficiency = predicted === 0 ? 0 : (actual / predicted) * 100;
 
     // -------------------------
-    // DMBI (INSIGHTS)
+    // SEASON DETECTION
+    // -------------------------
+    let season = "";
+
+    if (temperature > 35) {
+        season = "Summer";
+    } else if (temperature < 20) {
+        season = "Winter";
+    } else {
+        season = "Moderate";
+    }
+
+    // -------------------------
+    // DMBI (REAL INSIGHTS)
     // -------------------------
     let insight = "";
 
-    if (temperature > 30 && humidity < 50) {
-        insight = "High temperature and low humidity causing water loss";
+    if (season === "Summer") {
+        insight = "Recovered water can be used for irrigation and groundwater recharge due to high evaporation conditions.";
     } 
-    else if (humidity > 70) {
-        insight = "High humidity improves water recovery";
+    else if (season === "Winter") {
+        insight = "Recovered water can be stored and reused within cooling systems due to low evaporation.";
     } 
     else {
-        insight = "Moderate conditions for recovery";
+        insight = "Recovered water can be partially reused and partially directed for agricultural applications.";
     }
 
-    // DISPLAY
+    // Additional conditions
+    if (humidity > 70) {
+        insight += " High humidity increases condensation efficiency.";
+    }
+
+    if (humidity < 40) {
+        insight += " Low humidity leads to higher water loss, system optimization required.";
+    }
+
+    // -------------------------
+    // DISPLAY OUTPUT
+    // -------------------------
     document.getElementById("temp").innerText = temperature + " °C";
     document.getElementById("hum").innerText = humidity + " %";
-    document.getElementById("pred").innerText = predicted + " L";
-    document.getElementById("actual").innerText = actual + " L";
-    document.getElementById("eff").innerText = efficiency + " %";
+    document.getElementById("pred").innerText = predicted.toFixed(2) + " L";
+    document.getElementById("actual").innerText = actual.toFixed(2) + " L";
+    document.getElementById("eff").innerText = efficiency.toFixed(2) + " %";
     document.getElementById("insight").innerText = insight;
 }
