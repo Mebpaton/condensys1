@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CondenSys System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="overlay"></div>
+
+<div class="container">
+    <h1>CondenSys</h1>
+    <p>AI-Based Water Recovery System</p>
+
+    <button onclick="runSystem()">Run System</button>
+
+    <div class="output">
+        <p>Temperature: <span id="temp">-</span></p>
+        <p>Humidity: <span id="hum">-</span></p>
+        <p>Predicted Water (DNN): <span id="pred">-</span></p>
+        <p>Actual Water: <span id="actual">-</span></p>
+        <p>Efficiency: <span id="eff">-</span></p>
+        <p>DMBI Insight: <span id="insight">-</span></p>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
