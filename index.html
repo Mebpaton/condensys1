@@ -3,29 +3,50 @@
 <head>
     <title>CondenSys System</title>
     <link rel="stylesheet" href="style.css">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
 
 <div class="overlay"></div>
 
 <div class="container">
+
     <h1>CondenSys</h1>
     <p>AI-Based Water Recovery System</p>
 
+    <!-- INPUT -->
     <div class="inputs">
         <input type="number" id="tempInput" placeholder="Temperature (°C)">
         <input type="number" id="humInput" placeholder="Humidity (%)">
         <button onclick="runSystem()">Run System</button>
     </div>
 
+    <!-- OUTPUT -->
     <div class="output">
-        <p>Temperature: <span id="temp">-</span></p>
-        <p>Humidity: <span id="hum">-</span></p>
-        <p>Predicted Water (DNN): <span id="pred">-</span></p>
+        <p>Predicted Water: <span id="pred">-</span></p>
         <p>Actual Water: <span id="actual">-</span></p>
         <p>Efficiency: <span id="eff">-</span></p>
-        <p>DMBI Insight: <span id="insight">-</span></p>
+        <p id="warning"></p>
+        <p>DMBI Decision: <span id="insight">-</span></p>
     </div>
+
+    <!-- GRAPH -->
+    <canvas id="chart" width="400" height="200"></canvas>
+
+    <!-- HOW IT WORKS -->
+    <div class="section">
+        <h2>How It Works</h2>
+        <p>Sensor data → AI prediction → Comparison → Optimization</p>
+    </div>
+
+    <!-- IMPACT -->
+    <div class="section">
+        <h2>Impact</h2>
+        <p>This system reduces water wastage and supports reuse in agriculture, industry, and groundwater restoration.</p>
+    </div>
+
 </div>
 
 <script src="script.js"></script>
