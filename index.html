@@ -12,7 +12,11 @@
     <h1>CondenSys</h1>
     <p>AI-Based Water Recovery System</p>
 
-    <button onclick="runSystem()">Run System</button>
+    <div class="inputs">
+        <input type="number" id="tempInput" placeholder="Temperature (°C)">
+        <input type="number" id="humInput" placeholder="Humidity (%)">
+        <button onclick="runSystem()">Run System</button>
+    </div>
 
     <div class="output">
         <p>Temperature: <span id="temp">-</span></p>
