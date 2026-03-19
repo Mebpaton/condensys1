@@ -22,7 +22,7 @@ function runSystem() {
     let efficiency = predicted === 0 ? 0 : (actual / predicted) * 100;
 
     // -------------------------
-    // SPM (ANOMALY DETECTION)
+    // SPM
     // -------------------------
     let warning = "";
     if (efficiency < 50) {
@@ -30,7 +30,7 @@ function runSystem() {
     }
 
     // -------------------------
-    // DMBI DECISION SYSTEM
+    // DMBI DECISION
     // -------------------------
     let decision = "";
 
@@ -46,6 +46,10 @@ function runSystem() {
         decision += " High humidity improves recovery.";
     }
 
+    if (humidity < 40) {
+        decision += " Low humidity leads to higher water loss.";
+    }
+
     // -------------------------
     // DISPLAY
     // -------------------------
@@ -56,7 +60,7 @@ function runSystem() {
     document.getElementById("warning").innerText = warning;
 
     // -------------------------
-    // GRAPH
+    // GRAPH FIXED
     // -------------------------
     let ctx = document.getElementById("chart").getContext("2d");
 
@@ -68,8 +72,32 @@ function runSystem() {
             labels: ["Predicted", "Actual"],
             datasets: [{
                 label: "Water (Liters)",
-                data: [predicted, actual]
+                data: [predicted, actual],
+                backgroundColor: ["#00c3ff", "#007bff"],
+                borderColor: ["#ffffff", "#ffffff"],
+                borderWidth: 1
             }]
+        },
+        options: {
+            plugins: {
+                legend: {
+                    labels: {
+                        color: "white"
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    ticks: {
+                        color: "white"
+                    }
+                },
+                y: {
+                    ticks: {
+                        color: "white"
+                    }
+                }
+            }
         }
     });
 }
